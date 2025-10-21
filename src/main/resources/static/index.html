@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Financial Tracker</h1>
+            <p>Track your income and expenses for complete financial overview</p>
+        </header>
+
+        <!-- Financial Summary Dashboard -->
+        <section class="financial-summary">
+            <div class="summary-card income-card">
+                <h3>💵 Total Income</h3>
+                <p class="amount" id="total-income">$0.00</p>
+            </div>
+            <div class="summary-card expense-card">
+                <h3>💸 Total Expenses</h3>
+                <p class="amount" id="total-expenses">$0.00</p>
+            </div>
+            <div class="summary-card balance-card">
+                <h3>💰 Balance</h3>
+                <p class="amount" id="balance">$0.00</p>
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="expenses">Expenses</button>
+            <button class="tab-btn" data-tab="income">Income</button>
+        </div>
+
+        <!-- Expense Section -->
+        <div id="expenses-section" class="tab-content active">
+            <!-- Add Expense Form -->
+        <section class="expense-form-section">
+            <h2 id="form-title">Add New Expense</h2>
+            <form id="expense-form">
+                <input type="hidden" id="expense-id">
+                
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" placeholder="e.g., Groceries" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="amount">Amount ($)</label>
+                        <input type="number" id="amount" step="0.01" min="0.01" placeholder="0.00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" required>
+                        <option value="">Select a category</option>
+                        <option value="Food">Food</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Education">Education</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Add Expense</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-btn" style="display: none;">Cancel</button>
+                </div>
+            </form>
+        </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <h2>Expense Analytics</h2>
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>Expenses by Category</h3>
+                        <canvas id="category-chart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Expenses Over Time</h3>
+                        <canvas id="timeline-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expenses List -->
+            <section class="expenses-section">
+                <div class="section-header">
+                    <h2>All Expenses</h2>
+                    <div class="total-amount">
+                        Total: $<span id="total-amount">0.00</span>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <input type="text" id="search" placeholder="Search expenses...">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="Food">Food</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Education">Education</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div id="expenses-list" class="expenses-list">
+                    <!-- Expenses will be dynamically added here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Income Section -->
+        <div id="income-section" class="tab-content">
+            <!-- Add Income Form -->
+            <section class="expense-form-section">
+                <h2 id="income-form-title">Add New Income</h2>
+                <form id="income-form">
+                    <input type="hidden" id="income-id">
+                    
+                    <div class="form-group">
+                        <label for="income-source">Source</label>
+                        <input type="text" id="income-source" placeholder="e.g., Salary, Freelance, Investment" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="income-amount">Amount ($)</label>
+                            <input type="number" id="income-amount" step="0.01" min="0.01" placeholder="0.00" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="income-date">Date</label>
+                            <input type="date" id="income-date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="income-category">Category</label>
+                        <select id="income-category" required>
+                            <option value="">Select a category</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Freelance">Freelance</option>
+                            <option value="Investment">Investment</option>
+                            <option value="Business">Business</option>
+                            <option value="Gift">Gift</option>
+                            <option value="Bonus">Bonus</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="income-description">Description (Optional)</label>
+                        <textarea id="income-description" placeholder="Add any additional notes..." rows="3"></textarea>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary" id="income-submit-btn">Add Income</button>
+                        <button type="button" class="btn btn-secondary" id="income-cancel-btn" style="display: none;">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Income Charts Section -->
+            <section class="charts-section">
+                <h2>Income Analytics</h2>
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>Income by Category</h3>
+                        <canvas id="income-category-chart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Income Over Time</h3>
+                        <canvas id="income-timeline-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Income List -->
+            <section class="expenses-section">
+                <div class="section-header">
+                    <h2>All Income</h2>
+                    <div class="total-amount">
+                        Total: $<span id="total-income-amount">0.00</span>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <input type="text" id="income-search" placeholder="Search income...">
+                    <select id="income-category-filter">
+                        <option value="">All Categories</option>
+                        <option value="Salary">Salary</option>
+                        <option value="Freelance">Freelance</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Business">Business</option>
+                        <option value="Gift">Gift</option>
+                        <option value="Bonus">Bonus</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div id="income-list" class="expenses-list">
+                    <!-- Income will be dynamically added here -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
