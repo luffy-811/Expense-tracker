@@ -168,6 +168,7 @@ POST /api/expenses
 ## Project Structure
 
 ``
+
 PROJECT8/
 ├── src/
 │   ├── main/
@@ -195,6 +196,7 @@ PROJECT8/
 │   └── test/
 ├── pom.xml
 └── README.md
+
 ``
 
 ## Categories
